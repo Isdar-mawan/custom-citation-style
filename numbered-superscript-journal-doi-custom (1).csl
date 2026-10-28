@@ -9,7 +9,6 @@
     <summary>Numbered references formatted to approximate the provided examples: initials and surnames, abbreviated italic journal title, bold volume, issue, pages, year, and DOI URL on a new line.</summary>
     <updated>2026-10-28T00:00:00+00:00</updated>
   </info>
-
   <macro name="author">
     <names variable="author">
       <name initialize-with=". " name-as-sort-order="all" sort-separator=" " delimiter=", " and="text" delimiter-precedes-last="always"/>
