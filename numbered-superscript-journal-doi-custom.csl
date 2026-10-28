@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="en-US">
+  <info>
+    <title>Numbered Superscript - Journal References with DOI (Custom)</title>
+    <id>http://www.zotero.org/styles/numbered-superscript-journal-doi-custom</id>
+    <link href="http://www.zotero.org/styles/numbered-superscript-journal-doi-custom" rel="self"/>
+    <author><name>Custom CSL</name></author>
+    <category citation-format="numeric"/>
+    <summary>Numbered references formatted to approximate the provided examples: initials and surnames, abbreviated italic journal title, bold volume, issue, pages, year, and DOI URL on a new line.</summary>
+    <updated>2026-10-28T00:00:00+00:00</updated>
+  </info>
+
+  <macro name="author">
+    <names variable="author">
+      <name initialize-with=". " name-as-sort-order="all" sort-separator=" " delimiter=", " and="text" delimiter-precedes-last="always"/>
+      <substitute>
+        <names variable="editor">
+          <name initialize-with=". " name-as-sort-order="all" sort-separator=" " delimiter=", " and="text" delimiter-precedes-last="always"/>
+        </names>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="doi">
+    <choose>
+      <if variable="DOI">
+        <text variable="DOI" prefix="https://doi.org/" />
+      </if>
+      <else-if variable="URL">
+        <text variable="URL"/>
+      </else-if>
+    </choose>
+  </macro>
+
+  <citation>
+    <sort><key variable="citation-number"/></sort>
+    <layout vertical-align="sup" delimiter=",">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+
+  <bibliography second-field-align="flush" et-al-min="8" et-al-use-first="7">
+    <layout>
+      <text variable="citation-number" suffix=". "/>
+      <choose>
+        <if type="article-journal">
+          <group delimiter=", ">
+            <text macro="author"/>
+            <text variable="container-title" form="short" font-style="italic"/>
+            <group delimiter="">
+              <text variable="volume" font-weight="bold"/>
+              <text variable="issue" prefix="(" suffix=")"/>
+            </group>
+            <group delimiter="">
+              <text variable="page"/>
+              <text variable="article-number"/>
+              <date variable="issued" prefix="(" suffix=")">
+                <date-part name="year"/>
+              </date>
+            </group>
+          </group>
+          <text macro="doi" display="block"/>
+        </if>
+        <else-if type="book">
+          <group delimiter=", ">
+            <text macro="author"/>
+            <text variable="title" font-style="italic"/>
+            <text variable="publisher"/>
+            <text variable="publisher-place"/>
+            <date variable="issued" prefix="(" suffix=")">
+              <date-part name="year"/>
+            </date>
+          </group>
+          <text macro="doi" display="block"/>
+        </else-if>
+        <else-if type="chapter">
+          <group delimiter=", ">
+            <text macro="author"/>
+            <text variable="title"/>
+            <group delimiter=" ">
+              <text value="in:"/>
+              <text variable="container-title" font-style="italic"/>
+            </group>
+            <text variable="publisher"/>
+            <text variable="publisher-place"/>
+            <text variable="page" prefix="pp. "/>
+            <date variable="issued" prefix="(" suffix=")">
+              <date-part name="year"/>
+            </date>
+          </group>
+          <text macro="doi" display="block"/>
+        </else-if>
+        <else>
+          <group delimiter=", ">
+            <text macro="author"/>
+            <text variable="title" font-style="italic"/>
+            <text variable="container-title" font-style="italic"/>
+            <text variable="publisher"/>
+            <text variable="publisher-place"/>
+            <text variable="page"/>
+            <date variable="issued" prefix="(" suffix=")">
+              <date-part name="year"/>
+            </date>
+          </group>
+          <text macro="doi" display="block"/>
+        </else>
+      </choose>
+      <text value="."/>
+    </layout>
+  </bibliography>
+</style>
