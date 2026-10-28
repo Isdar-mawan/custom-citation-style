@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" default-locale="en-US">
+  <info>
+    <title>Gaya Referensi Kustom (Numerik Superskrip, Volume Tebal, Halaman(Tahun), DOI)</title>
+    <title-short>Gaya Kustom</title-short>
+    <id>http://www.zotero.org/styles/gaya-referensi-kustom</id>
+    <category citation-format="numeric"/>
+    <category field="chemistry"/>
+    <summary>Sitasi superskrip. Daftar pustaka bernomor: Penulis, Jurnal (miring), Volume(Issue) (tebal), Halaman-awal(Tahun), DOI.</summary>
+    <updated>2026-10-28T00:00:00+00:00</updated>
+  </info>
+
+  <macro name="author">
+    <names variable="author">
+      <name and="text" delimiter=", " delimiter-precedes-last="contextual"/>
+    </names>
+  </macro>
+
+  <macro name="volume-issue">
+    <group>
+      <text variable="volume" font-weight="bold"/>
+      <text variable="issue" prefix="(" suffix=")" font-weight="bold"/>
+    </group>
+  </macro>
+
+  <macro name="page-year">
+    <group>
+      <text variable="page-first"/>
+      <date variable="issued" prefix="(" suffix=")">
+        <date-part name="year"/>
+      </date>
+    </group>
+  </macro>
+
+  <macro name="link">
+    <choose>
+      <if variable="DOI">
+        <text variable="DOI" prefix="https://doi.org/"/>
+      </if>
+      <else-if variable="URL">
+        <text variable="URL"/>
+      </else-if>
+    </choose>
+  </macro>
+
+  <citation>
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout vertical-align="sup" delimiter=",">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+
+  <bibliography second-field-align="flush" entry-spacing="0">
+    <layout>
+      <text variable="citation-number" suffix="."/>
+      <group delimiter=", ">
+        <text macro="author"/>
+        <text variable="container-title" font-style="italic"/>
+        <text macro="volume-issue"/>
+        <text macro="page-year"/>
+        <text macro="link"/>
+      </group>
+    </layout>
+  </bibliography>
+</style>
